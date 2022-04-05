@@ -1,0 +1,71 @@
+﻿@page "/odds"
+
+<PageTitle>Odds</PageTitle>
+
+<h1>Odds</h1>
+
+
+@if (oddsViewModel != null)
+{
+	<EditForm Model="oddsViewModel" OnValidSubmit="OnValidSubmitAsync">
+
+		<DataAnnotationsValidator></DataAnnotationsValidator>
+		<ValidationSummary></ValidationSummary>
+
+		<div class="form-group">
+			<label for="n">N:</label>
+			<InputNumber id="n" @bind-Value="oddsViewModel.N" class="form-control"></InputNumber>
+		</div>
+
+		<div class="form-group">
+			<label for="r">R:</label>
+			<InputNumber id="r" @bind-Value="oddsViewModel.R" class="form-control"></InputNumber>
+		</div>
+
+		<div class="form-group">
+			<label for="isOrderImportant">Order is Important</label>
+			<InputCheckbox id="isOrderImportant" @bind-Value="oddsViewModel.IsOrderImportant">Is Order Important</InputCheckbox>
+		</div>
+		<div class="form-group">
+			<label for="isRepetitionAllowed">Repetition is Allowed</label>
+			<InputCheckbox id="isRepetitionAllowed" @bind-Value="oddsViewModel.IsRepetitionAllowed">Is Repetition Allowed</InputCheckbox>
+		</div>
+
+		<button type="submit" class="btn btn-primary">Click me</button>
+
+		<label>Result</label>
+		<InputNumber id="result" @bind-Value="oddsViewModel.Result" class="form-control"></InputNumber>
+
+	</EditForm>
+}
+
+
+
+@code {
+
+	private OddsViewModel oddsViewModel = new OddsViewModel();
+
+	private async Task OnValidSubmitAsync()
+	{
+		int n = oddsViewModel.N;
+		int r = oddsViewModel.R;
+
+		if (oddsViewModel.IsOrderImportant && oddsViewModel.IsRepetitionAllowed)
+		{
+			oddsViewModel.Result = Math.Pow(n, r);
+		}
+		else if (oddsViewModel.IsOrderImportant && !oddsViewModel.IsRepetitionAllowed)
+		{
+			oddsViewModel.Result = Helpers.Factorial(n) / Helpers.Factorial(n - r);
+		}
+		else if (!oddsViewModel.IsOrderImportant && oddsViewModel.IsRepetitionAllowed)
+		{
+			oddsViewModel.Result = Helpers.Factorial(r + n - 1) / (Helpers.Factorial(r) * Helpers.Factorial(n - 1));
+		}
+		else
+		{
+			oddsViewModel.Result = Helpers.Factorial(n) / (Helpers.Factorial(r) * Helpers.Factorial(n - r));
+		}
+	}
+
+}
