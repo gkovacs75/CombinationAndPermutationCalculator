@@ -4,30 +4,30 @@
 
 @if (oddsViewModel != null)
 {
-	<EditForm Model="oddsViewModel" OnValidSubmit="OnValidSubmitAsync">
+	<EditForm class="form-inline" Model="oddsViewModel" OnValidSubmit="OnValidSubmitAsync">
 
 		<DataAnnotationsValidator></DataAnnotationsValidator>
 		<ValidationSummary></ValidationSummary>
-		<div class="form-inline">
-			<div class="form-group">
-				<span>N:</span>
-				<InputNumber id="n" @bind-Value="oddsViewModel.N" class="form-control"></InputNumber>
-			</div>
 
-			<div class="form-group">
-				<label for="r">R:</label>
-				<InputNumber id="r" @bind-Value="oddsViewModel.R" class="form-control"></InputNumber>
-			</div>
-
-			<div class="form-group">
-				<label for="isOrderImportant">Order is Important</label>
-				<InputCheckbox id="isOrderImportant" @bind-Value="oddsViewModel.IsOrderImportant">Is Order Important</InputCheckbox>
-			</div>
-			<div class="form-group">
-				<label for="isRepetitionAllowed">Repetition is Allowed</label>
-				<InputCheckbox id="isRepetitionAllowed" @bind-Value="oddsViewModel.IsRepetitionAllowed">Is Repetition Allowed</InputCheckbox>
-			</div>
+		<div class="form-group">
+			<span>N:</span>
+			<InputNumber id="n" @bind-Value="oddsViewModel.N" class="form-control"></InputNumber>
 		</div>
+
+		<div class="form-group">
+			<label for="r">R:</label>
+			<InputNumber id="r" @bind-Value="oddsViewModel.R" class="form-control"></InputNumber>
+		</div>
+
+		<div class="form-group">
+			<label for="isOrderImportant">Order is Important</label>
+			<InputCheckbox id="isOrderImportant" @bind-Value="oddsViewModel.IsOrderImportant">Is Order Important</InputCheckbox>
+		</div>
+		<div class="form-group">
+			<label for="isRepetitionAllowed">Repetition is Allowed</label>
+			<InputCheckbox id="isRepetitionAllowed" @bind-Value="oddsViewModel.IsRepetitionAllowed">Is Repetition Allowed</InputCheckbox>
+		</div>
+
 
 		<div>
 			<button type="submit" class="btn btn-primary">Calculate</button>
